@@ -10,7 +10,7 @@ import UIKit
 
 class ElementsDetailViewController: UIViewController {
 
-    var elements: ElementData!
+    var elements: Element!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -67,7 +67,8 @@ class ElementsDetailViewController: UIViewController {
     }
     
     @IBAction func favorite(_ sender: UIBarButtonItem) {
-        let favoriteElement = FavoriteElements.init(elementName: elements.name, favoritedBy: "Ian K. Bailey", elementSymbol: elements.symbol)
+        let favoriteElement = Element.init(name: elements.name, number: elements.number, atomicMass: elements.atomicMass, boil: elements.boil, discoveredBy: elements.discoveredBy, melt: elements.melt
+            , symbol: elements.symbol, favoritedBy: "Ian Bailey")
         
         ElementsAPIClient.postElements(element: favoriteElement) { (result) in
             switch result {

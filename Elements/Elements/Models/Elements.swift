@@ -7,30 +7,25 @@
 //
 
 import Foundation
-struct ElementsData: Decodable {
-    let DataOfElements: [ElementData]
-}
-    struct ElementData: Decodable {
+
+struct Element: Codable {
     let name: String
-    let appearance: String?
+    let number: Int
     let atomicMass: Double?
     let boil: Double?
-    let category: String
-    let color: String?
-    let density: Double?
     let discoveredBy: String?
     let melt: Double?
-    let molarHeat: Double?
-    let namedBy: String?
-    let number: Int
-    let period: Int
-    let phase: String
-    let source: String
-    let spectralImg: URL?
-    let summary: String
     let symbol: String
-    let xpos: Int
-    let ypos: Int
+    let favoritedBy: String?
         
-        
+        private enum CodingKeys: String, CodingKey {
+            case name
+            case number
+            case atomicMass = "atomic_mass"
+            case boil
+            case discoveredBy = "discovered_by"
+            case melt
+            case symbol
+            case favoritedBy
+        }
 }

@@ -11,14 +11,39 @@
         <!--Favorites-->
         <scene sceneID="4Uc-Te-Qxw">
             <objects>
-                <viewController id="0tV-j8-YUX" sceneMemberID="viewController">
+                <viewController id="0tV-j8-YUX" customClass="FavoritesViewController" customModule="Elements" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tvp-Vn-FjE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-eA-ufY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoriteCell" id="A4M-Kg-bdG">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A4M-Kg-bdG" id="HID-LI-pkY">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qFs-qP-Kwb" firstAttribute="trailing" secondItem="B9j-eA-ufY" secondAttribute="trailing" id="Bmn-T5-fh7"/>
+                            <constraint firstItem="qFs-qP-Kwb" firstAttribute="bottom" secondItem="B9j-eA-ufY" secondAttribute="bottom" id="ZE4-bm-whN"/>
+                            <constraint firstItem="B9j-eA-ufY" firstAttribute="top" secondItem="qFs-qP-Kwb" secondAttribute="top" id="bU7-Fa-Mcf"/>
+                            <constraint firstItem="B9j-eA-ufY" firstAttribute="leading" secondItem="qFs-qP-Kwb" secondAttribute="leading" id="oUs-Av-L2g"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qFs-qP-Kwb"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="heart.fill" catalog="system" id="xZF-Dt-MCD"/>
+                    <connections>
+                        <outlet property="favoritesTableView" destination="B9j-eA-ufY" id="2hP-89-pbF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Xb-op-FiU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

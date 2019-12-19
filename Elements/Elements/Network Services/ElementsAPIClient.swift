@@ -9,7 +9,7 @@
 import Foundation
 
 struct ElementsAPIClient {
-static func fetchElements(completion: @escaping (Result <[ElementData], AppError>) ->()) {
+static func fetchElements(completion: @escaping (Result <[Element], AppError>) ->()) {
     
     let podcastURL = "https://5c1d79abbc26950013fbcaa9.mockapi.io/api/v1/elements"
     
@@ -27,7 +27,7 @@ static func fetchElements(completion: @escaping (Result <[ElementData], AppError
             completion(.failure(.networkClientError(appError)))
         case .success(let data):
             do {
-                let elementsInfo = try JSONDecoder().decode([ElementData].self, from: data)
+                let elementsInfo = try JSONDecoder().decode([Element].self, from: data)
                 completion(.success(elementsInfo))
             } catch {
                 completion(.failure(.decodingError(error)))
@@ -37,7 +37,7 @@ static func fetchElements(completion: @escaping (Result <[ElementData], AppError
 }
 
 
-    static func postElements(element: FavoriteElements , completion: @escaping (Result<Bool,AppError>) -> ()) {
+    static func postElements(element: Element, completion: @escaping (Result<Bool,AppError>) -> ()) {
   
   let endpointURLString = "http://5c1d79abbc26950013fbcaa9.mockapi.io/api/v1/favorites"
   guard let url = URL(string: endpointURLString) else {
@@ -67,5 +67,36 @@ static func fetchElements(completion: @escaping (Result <[ElementData], AppError
     completion(.failure(.encodingError(error)))
   }
   
+}
+
+
+
+
+
+static func fetchFavorites(completion: @escaping (Result <[Element], AppError>) ->()) {
+    
+    let podcastURL = "http://5c1d79abbc26950013fbcaa9.mockapi.io/api/v1/favorites"
+    
+    guard let url = URL(string: podcastURL) else {
+        completion(.failure(.badURL(podcastURL)))
+        return
+    }
+    
+    let request = URLRequest(url: url)
+    
+    
+    NetworkHelper.shared.performDataTask(with: request) { (result) in
+        switch result {
+        case .failure(let appError):
+            completion(.failure(.networkClientError(appError)))
+        case .success(let data):
+            do {
+                let elementsInfo = try JSONDecoder().decode([Element].self, from: data)
+                completion(.success(elementsInfo))
+            } catch {
+                completion(.failure(.decodingError(error)))
+            }
+        }
+    }
 }
 }

@@ -12,7 +12,7 @@ class ElementsViewController: UIViewController {
 
     @IBOutlet weak var elementsTableView: UITableView!
     
-    var elements = [ElementData]() {
+    var elements = [Element]() {
         didSet {
             DispatchQueue.main.async {
                 self.elementsTableView.reloadData()
@@ -31,8 +31,8 @@ class ElementsViewController: UIViewController {
     private func getElements() {
         ElementsAPIClient.fetchElements { (result) in
             switch result {
-            case .success(let data):
-                self.elements = data
+            case .success(let elements):
+                self.elements = elements
             case .failure(let appError):
                 print("appError \(appError)")
             }
@@ -66,3 +66,5 @@ extension ElementsViewController: UITableViewDataSource {
     
     
 }
+
+//String(format: "%03d", myInt)
