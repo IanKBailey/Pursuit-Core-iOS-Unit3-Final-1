@@ -15,9 +15,9 @@ class ElementCell: UITableViewCell {
     @IBOutlet weak var cellNameLabel: UILabel!
     @IBOutlet weak var cellDiscoveredByLabel: UILabel!
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//    }
     
     func configureCell(for element: Element) {
         cellNameLabel.text = element.name

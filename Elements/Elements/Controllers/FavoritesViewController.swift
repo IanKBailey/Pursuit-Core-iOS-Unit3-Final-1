@@ -41,6 +41,9 @@ class FavoritesViewController: UIViewController {
     
     @objc private func getFavorites() {
         ElementsAPIClient.fetchFavorites { [weak self] (result) in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
             switch result {
             case .success(let favorites):
                 self?.favorites = favorites.filter{$0.favoritedBy == "Ian Bailey"}
