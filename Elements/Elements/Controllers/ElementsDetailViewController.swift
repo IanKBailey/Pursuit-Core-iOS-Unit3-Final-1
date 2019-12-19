@@ -9,7 +9,7 @@
 import UIKit
 
 class ElementsDetailViewController: UIViewController {
-
+    
     var elements: Element!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
@@ -28,7 +28,7 @@ class ElementsDetailViewController: UIViewController {
         updateUI()
     }
     
-
+    
     private func updateUI() {
         symbolLabel.text = "The Atomic symbol is \(elements.symbol)"
         numberLabel.text = "Its number is \(elements.number)"
@@ -52,15 +52,15 @@ class ElementsDetailViewController: UIViewController {
         } else {
             DiscoveredByLabel.text = "Unsure of who discovered \(elements.name)"
         }
-        elementImage.getImage(with: "http://images-of-elements.com/\(elements.name.lowercased()).jpg") { (result) in
+        elementImage.getImage(with: "http://images-of-elements.com/\(elements.name.lowercased()).jpg") {[weak self] (result) in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
-                    self.elementImage.image = image
+                    self?.elementImage.image = image
                 }
             case .failure(_):
                 DispatchQueue.main.async {
-                    self.elementImage.image = UIImage(systemName: "person.fill")
+                    self?.elementImage.image = UIImage(systemName: "person.fill")
                 }
             }
         }
@@ -70,15 +70,15 @@ class ElementsDetailViewController: UIViewController {
         let favoriteElement = Element.init(name: elements.name, number: elements.number, atomicMass: elements.atomicMass, boil: elements.boil, discoveredBy: elements.discoveredBy, melt: elements.melt
             , symbol: elements.symbol, favoritedBy: "Ian Bailey")
         
-        ElementsAPIClient.postElements(element: favoriteElement) { (result) in
+        ElementsAPIClient.postElements(element: favoriteElement) { [weak self](result) in
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Element favorited", message: "Thanks for telling us your favorite")
+                    self?.showAlert(title: "Element favorited", message: "Thanks for telling us your favorite")
                 }
             case .failure(let appError):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "error sending favorite", message: "\(appError)")
+                    self?.showAlert(title: "error sending favorite", message: "\(appError)")
                 }
                 
             }

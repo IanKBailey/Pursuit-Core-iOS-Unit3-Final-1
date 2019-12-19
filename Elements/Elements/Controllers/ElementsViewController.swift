@@ -9,7 +9,7 @@
 import UIKit
 
 class ElementsViewController: UIViewController {
-
+    
     @IBOutlet weak var elementsTableView: UITableView!
     
     var elements = [Element]() {
@@ -26,7 +26,7 @@ class ElementsViewController: UIViewController {
         super.viewDidLoad()
         elementsTableView.dataSource = self
         elementsTableView.delegate = self
-       getElements()
+        getElements()
     }
     
     private func getElements() {
@@ -46,12 +46,12 @@ class ElementsViewController: UIViewController {
         let element = elements[indexPath.row]
         elementsDetailViewController.elements = element
     }
-
+    
 }
 
 extension ElementsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return elements.count
+        return elements.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
