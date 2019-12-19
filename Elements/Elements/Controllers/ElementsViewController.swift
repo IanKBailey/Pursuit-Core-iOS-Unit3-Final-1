@@ -25,6 +25,7 @@ class ElementsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         elementsTableView.dataSource = self
+        elementsTableView.delegate = self
        getElements()
     }
     
@@ -54,17 +55,23 @@ extension ElementsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = elementsTableView.dequeueReusableCell(withIdentifier: "elementCell", for: indexPath)
+        guard let cell = elementsTableView.dequeueReusableCell(withIdentifier: "elementCell", for: indexPath) as? ElementCell else {
+            fatalError("Failed to dequeue Cell")
+        }
         
         let element = elements[indexPath.row]
         
-        cell.textLabel?.text = element.name
-        cell.detailTextLabel?.text = element.discoveredBy
+        cell.configureCell(for: element)
         
         return cell
     }
     
     
 }
+extension ElementsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+}
 
-//String(format: "%03d", myInt)
+

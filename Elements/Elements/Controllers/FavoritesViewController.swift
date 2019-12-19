@@ -25,7 +25,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getFavorites()
-        
+        favoritesTableView.dataSource = self
         
     }
     
@@ -33,7 +33,7 @@ class FavoritesViewController: UIViewController {
         ElementsAPIClient.fetchFavorites { (result) in
                    switch result {
                    case .success(let favorites):
-                       self.favorites = favorites
+                    self.favorites = favorites.filter{$0.favoritedBy == "Ian Bailey"}
                    case .failure(let appError):
                        print("appError \(appError)")
                    }
@@ -49,8 +49,13 @@ extension FavoritesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favoritesTableView.dequeueReusableCell(withIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+        let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath)
+        let favorite = favorites[indexPath.row]
+        cell.textLabel?.text = favorite.name
+        cell.detailTextLabel?.text = favorite.favoritedBy
+        return cell
     }
+        
     
     
 }
