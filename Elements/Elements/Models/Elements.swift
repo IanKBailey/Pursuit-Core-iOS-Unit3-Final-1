@@ -7,10 +7,10 @@
 //
 
 import Foundation
-struct ElementsData: Codable {
+struct ElementsData: Decodable {
     let DataOfElements: [ElementData]
 }
-    struct ElementData: Codable {
+    struct ElementData: Decodable {
     let name: String
     let appearance: String?
     let atomicMass: Double?

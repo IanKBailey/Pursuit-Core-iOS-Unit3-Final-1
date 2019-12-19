@@ -43,6 +43,7 @@ class ElementsViewController: UIViewController {
             fatalError("Couldn't segue")
         }
         let element = elements[indexPath.row]
+        elementsDetailViewController.elements = element
     }
 
 }
@@ -59,6 +60,7 @@ extension ElementsViewController: UITableViewDataSource {
         
         cell.textLabel?.text = element.name
         cell.detailTextLabel?.text = element.discoveredBy
+        
         return cell
     }
     
